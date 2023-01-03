@@ -11,6 +11,7 @@ import {
   PullToRefresh,
   FloatingBubble,
   SearchBar,
+  Dialog,
 } from "antd-mobile";
 import {
   EditSOutline,
@@ -63,7 +64,13 @@ const ShopList = ({ toBuyOnly = false, searchMode = false }) => {
       navigate(`/items/${itemId}`);
     },
     deleteItem: (itemId) => {
-      removeItem(itemId);
+      Dialog.confirm({
+        title: "Eliminar producto",
+        content: "¿Seguro que quieres eliminar el producto seleccionado?",
+        confirmText: "Eliminar",
+        cancelText: "Cancelar",
+        onConfirm: () => removeItem(itemId),
+      });
     },
     checkItem: (itemId) => {
       updateItem(itemId, { quantity: toBuyOnly ? 0 : 1 });
@@ -125,10 +132,6 @@ const ShopList = ({ toBuyOnly = false, searchMode = false }) => {
       searchRef.current?.focus();
     }
   }, [searchMode, items]);
-
-  // useEffect(() => {
-  //   setTimeout(handleLogout, 5000);
-  // }, []);
 
   return (
     <>
