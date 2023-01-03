@@ -39,6 +39,7 @@
   text-transform: uppercase;
   letter-spacing: 0.9px;
   font-weight: bold;
+  user-select: none;
 }
 
 .quantityCircle {
