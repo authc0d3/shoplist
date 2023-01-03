@@ -46,11 +46,12 @@ const Layout = () => {
 
   return (
     <>
-      <NavBar height={90} backArrow={false}>
+      <NavBar height={110} backArrow={false}>
         <div className="appTitle">🛒 ShopList</div>
         <TabBar
           activeKey={pathname}
           onChange={(value) => setRouteActive(value)}
+          style={{ position: "relative", top: "5px" }}
         >
           {tabs.map((item) => (
             <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
