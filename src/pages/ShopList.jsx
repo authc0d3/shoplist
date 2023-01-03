@@ -106,14 +106,14 @@ const ShopList = ({ toBuyOnly = false, searchMode = false }) => {
 
   function handleOnSearch(query) {
     setTimeout(() => {
-      setSearch(query);
-      console.log(query);
+      setSearch(query.toLowerCase());
     }, 500);
   }
 
-  function handleLogout() {
-    signOut(auth);
-  }
+  // TODO: implement logout
+  // function handleLogout() {
+  //   signOut(auth);
+  // }
 
   useEffect(() => {
     handleGetItems();
