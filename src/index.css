@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/*
+:root {
+  --adm-color-primary: #14ccfa;
+  --adm-color-danger: #ff5e5e;
+}
+*/
+
+.adm-nav-bar {
+  display: block;
+}
+
+.adm-tab-bar-item {
+  color: #fff;
+}
+
+.adm-tab-bar-item-active {
+  color: var(--adm-color-primary);
+}
+
+.appTitle {
+  position: relative;
+  top: -5px;
+}
+
+.swipeButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.swipeButton span {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  font-weight: bold;
+}
+
+.quantityCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 100%;
+  background-color: var(--adm-color-primary);
+  color: #fff;
+}
+
+.quantityCircleChecked {
+  background-color: var(--adm-color-success);
+}
+
+.search {
+  padding: 8px;
+}
+
+.loginScreen {
+  background-color: #293038;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  height: 100vh;
+}
+
+.loginScreen h2 {
+  margin-top: -120px;
+  margin-bottom: 30px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 80%;
+  max-width: 250px;
+  margin: 0 auto;
+}
+
+.loginForm input {
+  display: block;
+  border-radius: 10px;
+  padding: 8px 10px;
+  outline: none;
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+::placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
