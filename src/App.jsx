@@ -19,17 +19,17 @@ import { firebaseApp } from "./db";
 
 const tabs = [
   {
-    key: "/",
+    key: "/shoplist",
     title: "Comprar",
     icon: <ShopbagOutline />,
   },
   {
-    key: "/items",
+    key: "/shoplist/items",
     title: "Todo",
     icon: <UnorderedListOutline />,
   },
   {
-    key: "/search",
+    key: "/shoplist/search",
     title: "Buscar",
     icon: <SearchOutline />,
   },
@@ -70,7 +70,7 @@ const App = () => {
       <SafeArea position="top" />
       {user ? (
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/shoplist" element={<Layout />}>
             <Route index element={<ShopList toBuyOnly />} />
             <Route path="items" element={<ShopList />} />
             <Route path="search" element={<ShopList searchMode />} />
@@ -81,7 +81,11 @@ const App = () => {
         </Routes>
       ) : (
         <Routes>
-          <Route path="/" index element={<Login isLoading={loading} />} />
+          <Route
+            path="/shoplist"
+            index
+            element={<Login isLoading={loading} />}
+          />
           <Route path="*" element={<Login />} />
         </Routes>
       )}
