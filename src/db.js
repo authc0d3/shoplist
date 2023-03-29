@@ -35,7 +35,6 @@ export async function getItem(id) {
   const itemRef = doc(db, collections.todo, id);
   const snapshot = await getDoc(itemRef);
   if (!snapshot.exists()) return undefined;
-  console.log(snapshot);
   return {
     ...snapshot.data(),
     id,
@@ -69,6 +68,5 @@ export async function getCategories() {
   snapshot.forEach((doc) => {
     categories.push({ ...doc.data(), id: doc.id });
   });
-  console.log(categories);
   return categories;
 }

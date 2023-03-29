@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { onSnapshot, collection, query, where } from "firebase/firestore";
-import { getAuth, signOut } from "firebase/auth";
 import {
   List,
   SwipeAction,
@@ -19,12 +18,11 @@ import {
   CheckOutline,
   AddOutline,
 } from "antd-mobile-icons";
-import { collections, db, updateItem, removeItem, firebaseApp } from "../db";
+import { collections, db, updateItem, removeItem } from "../db";
 import { QuantityCircle, SwipeButton } from "../components";
 
 const ShopList = ({ toBuyOnly = false, searchMode = false }) => {
   let unsubscribe = undefined;
-  const auth = getAuth(firebaseApp);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -61,7 +59,7 @@ const ShopList = ({ toBuyOnly = false, searchMode = false }) => {
 
   const swipeActions = {
     editItem: (itemId) => {
-      navigate(`/items/${itemId}`);
+      navigate(`/shoplist/items/${itemId}`);
     },
     deleteItem: (itemId) => {
       Dialog.confirm({
@@ -101,7 +99,9 @@ const ShopList = ({ toBuyOnly = false, searchMode = false }) => {
       const itemList = [];
       snapshot.forEach((doc) => itemList.push({ ...doc.data(), id: doc.id }));
       setItems(
-        itemList.sort((a, b) => (a.tag > b.tag ? 1 : b.tag > a.tag ? -1 : 0))
+        itemList.sort(
+          (a, b) => (a.task > b.task ? 1 : b.task > a.task ? -1 : 0)
+        )
       );
       setIsLoading(false);
     });
@@ -116,11 +116,6 @@ const ShopList = ({ toBuyOnly = false, searchMode = false }) => {
       setSearch(query.toLowerCase());
     }, 500);
   }
-
-  // TODO: implement logout
-  // function handleLogout() {
-  //   signOut(auth);
-  // }
 
   useEffect(() => {
     handleGetItems();

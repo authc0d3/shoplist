@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { Button } from "antd-mobile";
+import { Button, Toast } from "antd-mobile";
 import { firebaseApp } from "../db";
 
 const Login = () => {
@@ -10,17 +10,23 @@ const Login = () => {
 
   function handleLogin(e) {
     e.preventDefault();
-
     signInWithEmailAndPassword(
       auth,
       emailRef.current?.value,
       passRef.current?.value
-    );
+    ).catch((err) => {
+      console.error(err);
+      Toast.show({
+        icon: 'fail',
+        content: 'Credenciales incorrectas',
+      })
+    });
   }
 
   return (
     <div className="loginScreen">
       <h2>🛒 ShopList</h2>
+
       <form onSubmit={handleLogin} className="loginForm">
         <input
           ref={emailRef}

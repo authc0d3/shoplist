@@ -5,13 +5,14 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { TabBar, SafeArea } from "antd-mobile";
+import { TabBar, SafeArea, Grid, Button, Dialog } from "antd-mobile";
 import {
   ShopbagOutline,
   UnorderedListOutline,
   SearchOutline,
+  UploadOutline,
 } from "antd-mobile-icons";
 import { NavBar } from "./components";
 import { ShopList, Item, Login } from "./pages";
@@ -39,15 +40,35 @@ const Layout = () => {
   const location = useLocation();
   const { pathname } = location;
   const navigate = useNavigate();
+  const auth = getAuth(firebaseApp);
 
   function setRouteActive(route) {
     navigate(route);
   }
 
+  function handleLogout() {
+    Dialog.confirm({
+      title: "Cerrar sesión",
+      content: "¿Seguro que desea cerrar la sesión?",
+      confirmText: "Cerrar sesión",
+      cancelText: "Cancelar",
+      onConfirm: () => signOut(auth),
+    });
+  }
+
   return (
     <>
       <NavBar height={110} backArrow={false}>
-        <div className="appTitle">🛒 ShopList</div>
+        <Grid columns={2} gap={8}>
+          <Grid.Item>
+            <div className="appTitle">🛒 ShopList</div>
+          </Grid.Item>
+          <Grid.Item className="appTitleButtons">
+            <Button color="light" fill="none" onClick={handleLogout}>
+              <UploadOutline />
+            </Button>
+          </Grid.Item>
+        </Grid>
         <TabBar
           activeKey={pathname}
           onChange={(value) => setRouteActive(value)}
@@ -73,11 +94,11 @@ const App = () => {
         <Routes>
           <Route path="/shoplist" element={<Layout />}>
             <Route index element={<ShopList toBuyOnly />} />
-            <Route path="items" element={<ShopList />} />
-            <Route path="search" element={<ShopList searchMode />} />
+            <Route path="/shoplist/items" element={<ShopList />} />
+            <Route path="/shoplist/search" element={<ShopList searchMode />} />
           </Route>
-          <Route path="items/:itemId" element={<Item />} />
-          <Route path="new" element={<Item />} />
+          <Route path="/shoplist/items/:itemId" element={<Item />} />
+          <Route path="/shoplist/new" element={<Item />} />
           <Route path="*" element={<ShopList toBuyOnly />} />
         </Routes>
       ) : (
