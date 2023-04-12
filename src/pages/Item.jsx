@@ -114,6 +114,7 @@ const Item = () => {
               onClick={() => setShowPicker(true)}
               value={form.getFieldValue("tag")}
               onKeyDown={(e) => e.preventDefault()}
+              inputMode="none"
             />
           </Form.Item>
           <Picker

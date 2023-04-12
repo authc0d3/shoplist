@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { TabBar, SafeArea, Grid, Button, Dialog } from "antd-mobile";
+import { TabBar, SafeArea, Grid, Button, Dialog, SpinLoading } from "antd-mobile";
 import {
   ShopbagOutline,
   UnorderedListOutline,
@@ -90,7 +90,12 @@ const App = () => {
   return (
     <>
       <SafeArea position="top" />
-      {user ? (
+      {loading && (
+        <div className="loading">
+          <SpinLoading color="primary" />
+        </div>
+      )}
+      {!loading && user && (
         <Routes>
           <Route path="/shoplist" element={<Layout />}>
             <Route index element={<ShopList toBuyOnly />} />
@@ -101,7 +106,8 @@ const App = () => {
           <Route path="/shoplist/new" element={<Item />} />
           <Route path="*" element={<ShopList toBuyOnly />} />
         </Routes>
-      ) : (
+      )}
+      {!loading && !user && (
         <Routes>
           <Route
             path="/shoplist"

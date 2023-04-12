@@ -8,7 +8,7 @@ import "./index.css";
 document.addEventListener('touchmove',
   function(e) {
       e.preventDefault();
-  }, {passive:false}
+  }, { passive:false }
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(

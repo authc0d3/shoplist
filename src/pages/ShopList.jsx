@@ -108,7 +108,7 @@ const ShopList = ({ toBuyOnly = false, searchMode = false }) => {
   }
 
   function handleNewItem() {
-    navigate(`/new`);
+    navigate("/shoplist/new");
   }
 
   function handleOnSearch(query) {
